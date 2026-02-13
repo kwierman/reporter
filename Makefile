@@ -4,7 +4,7 @@ PYTHON := python
 PYTHONPATH := `pwd`
 
 #* Docker variables
-IMAGE := mypackage
+IMAGE := reporter
 VERSION := latest
 
 #* Poetry
@@ -41,14 +41,14 @@ formatting: codestyle
 #* Linting
 .PHONY: test
 test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=mypackage tests/
+	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=reporter tests/
 	poetry run coverage-badge -o assets/images/coverage.svg -f
 
 .PHONY: check-codestyle
 check-codestyle:
 	poetry run isort --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
-	poetry run darglint --verbosity 2 mypackage tests
+	poetry run darglint --verbosity 2 reporter tests
 
 .PHONY: mypy
 mypy:
@@ -57,7 +57,7 @@ mypy:
 .PHONY: check-safety
 check-safety:
 	poetry check
-	poetry run bandit -ll --recursive mypackage tests
+	poetry run bandit -ll --recursive reporter tests
 
 .PHONY: lint
 lint: test check-codestyle mypy check-safety

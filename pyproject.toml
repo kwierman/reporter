@@ -1,6 +1,6 @@
 [project]
-name = "mypackage"
-description = "Python Monte Carlo Framework"
+name = "reporter"
+description = "Scripted report generator for Python projects."
 authors = [
     {name = "kwierman",email = "kwierman@gmail.com"}
 ]
@@ -13,7 +13,7 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-mypackage = "mypackage.cli:app"
+reporter = "reporter.cli:app"
 
 [tool.poetry]
 version = "0.0.0"
@@ -51,11 +51,11 @@ build-backend = "poetry_dynamic_versioning.backend"
 source = ["tests"]
 
 [coverage.paths]
-source = "mypackage"
+source = "reporter"
 
 [coverage.run]
 branch = true
-#omit = ["mypackage/cli.py"]
+#omit = ["reporter/cli.py"]
 
 [tool.coverage.report]
 exclude_also = [
