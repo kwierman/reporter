@@ -1,10 +1,10 @@
 class Cell:
     def __init__(self, content: str):
-        self.content = content
+        self.content : str = content
         
 class Table:
     def __init__(self, name: str):
-        self.name = name
+        self.name : str = name
 
 class Section:
     def __init__(self, title: str):
@@ -13,4 +13,4 @@ class Section:
 class Report:
     def __init__(self, title: str):
         self.title = title
-        self.sections = []
+        self.sections : list[Section] = []
