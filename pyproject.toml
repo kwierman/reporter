@@ -1,0 +1,90 @@
+[project]
+name = "mypackage"
+description = "Python Monte Carlo Framework"
+authors = [
+    {name = "kwierman",email = "kwierman@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "typer (>=0.16.0,<0.17.0)"
+]
+dynamic = ["version"]
+
+[project.scripts]
+mypackage = "mypackage.cli:app"
+
+[tool.poetry]
+version = "0.0.0"
+
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = ["plugin"] }
+
+[tool.poetry.group.dev.dependencies]
+isort = {extras = ["colors"], version = "^6.0.1"}
+mypy = "^1.16.1"
+pre-commit = "^4.2.0"
+pydocstyle = "^6.3.0"
+pylint = "^3.3.7"
+pytest = "^8.4.1"
+pyupgrade = "^3.20.0"
+coverage = "^7.9.1"
+coverage-badge = "^1.1.2"
+pytest-html = "^4.1.1"
+pytest-cov = "^6.2.1"
+black = "^25.1.0"
+darglint = "^1.8.1"
+bandit = "^1.8.5"
+sphinx = "^8.2.3"
+
+
+[tool.poetry-dynamic-versioning]
+enable = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+
+[tool.coverage.run]
+source = ["tests"]
+
+[coverage.paths]
+source = "mypackage"
+
+[coverage.run]
+branch = true
+#omit = ["mypackage/cli.py"]
+
+[tool.coverage.report]
+exclude_also = [
+    'def __repr__',
+    'if self.debug:',
+    'if settings.DEBUG',
+    'raise AssertionError',
+    'raise NotImplementedError',
+    'if 0:',
+    'if __name__ == .__main__.:',
+    'if TYPE_CHECKING:',
+    'class .*\bProtocol\):',
+    '@(abc\.)?abstractmethod',
+    "def synthesize",
+    "def cli",
+    "class Base",
+]
+
+
+[tool.isort]
+# https://github.com/timothycrosley/isort/
+py_version = 39
+line_length = 88
+
+known_typing = ["typing", "types", "typing_extensions", "mypy", "mypy_extensions"]
+sections = ["FUTURE", "TYPING", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+include_trailing_comma = true
+profile = "black"
+multi_line_output = 3
+indent = 4
+color_output = true
+skip=[".poetry", ".venv"]
